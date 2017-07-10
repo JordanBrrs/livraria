@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br" ng-app="WebBiblios">
+<head>
+    <title>Biblio System</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <link href="Plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Assets/css/app.css" rel="stylesheet" />
+    <link href="Assets/css/w3.css" rel="stylesheet" />
+    <link href="Assets/css/toastr.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" ng-controller="BibliotecaCtrl">
+        <div class="row">
+            <h2>Gerenciamento de Livrarias</h2>
+            <div class="panel panel-default users-content"><!-- onClick="$('.divLivros').slideToggle();-->
+                <div class="panel-heading">Livros <a href="javascript:void(0);" class="glyphicon glyphicon-plus" ng-click="abreCadastroLivros()"></a></div>
+                <div class="alert alert-danger none"><p></p></div>
+                <div class="alert alert-success none"><p></p></div>
+                <div class="panel-body none divLivros">
+                    <form class="form" name="userForm">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Título</label>
+                                <input type="text" class="form-control" required id="titulo" ng-model="livro.Titulo" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Autor</label>
+                                <input type="text" class="form-control" required ng-model="livro.Autor" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Gênero</label>
+                                <select ng-model="livro.Genero"
+                                        ng-options="gen.id as gen.nome for gen in generos"
+                                         class="form-control">                                                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Quantidade em Estoque</label>
+                                <input type="number" class="form-control" name="name" ng-model="livro.Estoque" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="button" class="w3-button w3-green" ng-click="salvarLivro()">Salvar</button>
+                                <button type="button" class="w3-button w3-orange" ng-click="limparTela()">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table class="table table-striped">
+                    <tr>
+                        <th width="20%">Título</th>
+                        <th width="30%">Autor</th>
+                        <th width="20%">Gênero</th>
+                        <th width="14%">Estoque</th>
+                        <th width="10%"></th>
+                    </tr>
+                    <tr ng-repeat="l in livros | orderBy: 'Titulo'">
+                        <td>{{l.Titulo}}</td>
+                        <td>{{l.Autor}}</td>
+                        <td>{{l.Genero}}</td>
+                        <td>{{l.Estoque}}</td>
+                        <td>
+                            <a href="javascript:void(0);" class="glyphicon glyphicon-edit" ng-click="editarLivro(l)"></a>
+                            <a href="javascript:void(0);" class="glyphicon glyphicon-trash" ng-click="deletarLivro(l)"></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="Assets/js/jquery.min.js"></script>
+    <script src="Assets/js/angular.min.js"></script>
+    <script src="Assets/js/toastr.min.js"></script>
+    <script src="app/main.js"></script>
+    <script src="app/bilbioteca/BibliotecaService.js"></script>
+    <script src="app/bilbioteca/BibliotecaCtrl.js"></script>
+    <script src="Plugins/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
